@@ -1,6 +1,3 @@
-# p "Hello, how are you?".downcase.include?("l")
-
-
 # Substrings Mini-Project
 
 # Substrings will take an array of words to be matched against a word or string of words
