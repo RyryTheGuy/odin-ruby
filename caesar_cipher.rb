@@ -1,24 +1,20 @@
 # Caesar Cipher Mini-Project
-# Learned about Duck Typing: instead of finding what the object's class is, it's better to 
-#                            find what methods the object responds to (#respond_to?())
 
 # Caesar Cipher function will accept a string and shift amount each character will shift by
 def caesar_cipher(string, shift)
   # Break up the string into a character array
-  char_array = string.split("")
   # Convert the characters into their char codes
-  char_array.map! do |char|
+  char_array = string.split("").map do |char|
     # Only convert alphabetic characters to their char codes, otherwise return the character
     if /^[A-Z]+$/i.match?(char)
-      char.ord
+      # Shift the characters the specified shift amount and convert the character codes back into characters
+      wrap_char_code(char.ord, shift).chr
     else
       char
-    end
+    end 
   end
-  # Shift the characters the specified shift amount
-  char_array.map! { |code| code.respond_to?(:abs) ? wrap_char_code(code, shift) : code }
-  # Convert the character codes back into characters and join the characters back together
-  char_array.map! { |code| code.respond_to?(:abs) ? code.chr : code }.join
+  # Return the joined array of characters
+  return char_array.join
 end
 
 # Wraps the char code so any number past z will return to a or Z to A
@@ -37,4 +33,4 @@ def wrap_char_code(code, shift)
 end
 
 
-p caesar_cipher("Hello, World!", -29)
+p caesar_cipher("Hello, World!", 75)
