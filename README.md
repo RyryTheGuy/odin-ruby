@@ -15,3 +15,7 @@ Projects:
 - Stock Picker
 
   - Using an array of stock prices, find the best days to buy stocks and then sell them.
+
+- Bubble Sort
+
+  - Using an array of random numbers, sort them by using the sorting algorithm "Bubble sort".
