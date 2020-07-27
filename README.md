@@ -19,3 +19,9 @@ Basic Projects:
 - Bubble Sort
 
   - Using an array of random numbers, sort them by using the sorting algorithm "Bubble sort".
+
+Intermediate Projects:
+
+- Tic Tac Toe
+
+  - Classic 3x3 grid game. 2 players try to line up 3 of their marks in a row either horizontally, vertically, or diagonally.
