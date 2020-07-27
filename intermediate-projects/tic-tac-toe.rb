@@ -1,10 +1,9 @@
 # Tic Tac Toe
 class Board
-  @@board_arr = []
 
   def initialize
     # Populate Board with open positions
-    @@board_arr = [1,2,3,4,5,6,7,8,9]
+    @board_arr = [1,2,3,4,5,6,7,8,9]
     # Start the game
     start_game()
   end
@@ -30,7 +29,7 @@ class Board
    
   def show_board
     # Displays the board to the players
-    puts "\n #{@@board_arr[0]} | #{@@board_arr[1]} | #{@@board_arr[2]}\n------------\n #{@@board_arr[3]} | #{@@board_arr[4]} | #{@@board_arr[5]}\n------------\n #{@@board_arr[6]} | #{@@board_arr[7]} | #{@@board_arr[8]}"
+    puts "\n #{@board_arr[0]} | #{@board_arr[1]} | #{@board_arr[2]}\n------------\n #{@board_arr[3]} | #{@board_arr[4]} | #{@board_arr[5]}\n------------\n #{@board_arr[6]} | #{@board_arr[7]} | #{@board_arr[8]}"
   end
 
   def player_turn(mark)
@@ -50,9 +49,9 @@ class Board
     # Make sure the user entered a valid number
     if (1..9).include?(pos)
       # Make sure there isn't a mark at the position already
-      if @@board_arr[pos - 1] != "X" && @@board_arr[pos - 1] != "O"
+      if @board_arr[pos - 1] != "X" && @board_arr[pos - 1] != "O"
         # Add the player's mark to the board and return true to let the next player go
-        @@board_arr[pos - 1] = mark
+        @board_arr[pos - 1] = mark
         return true
       end
       # Let the user know that they can't pick that spot
@@ -70,7 +69,7 @@ class Board
     if @last_turn == "O"
       # Find the indexes of all the 'O' marks
       o_positions = []
-      @@board_arr.each_with_index do |value, index|
+      @board_arr.each_with_index do |value, index|
         o_positions << index if value == "O"
       end
 
@@ -86,7 +85,7 @@ class Board
     else 
       # Find all the 'X' mark indexes
       x_positions = []
-      @@board_arr.each_with_index do |value, index|
+      @board_arr.each_with_index do |value, index|
         x_positions << index if value == "X"
       end
       
@@ -106,7 +105,7 @@ class Board
 
   def check_for_draw
     # Draws only occur if there is no winner and the board has no more open positions to play
-    if @winner == false && !@@board_arr.any?(Integer)
+    if @winner == false && !@board_arr.any?(Integer)
       @winner = true
       @last_turn = "D"
     end
