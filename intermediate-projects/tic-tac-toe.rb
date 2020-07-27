@@ -65,42 +65,21 @@ class Board
   end
 
   def check_for_winner
-    # If 'O' was last to go, just check to see if O wins otherwise check to see if 'X' wins
-    if @last_turn == "O"
-      # Find the indexes of all the 'O' marks
-      o_positions = []
-      @board_arr.each_with_index do |value, index|
-        o_positions << index if value == "O"
-      end
-
-      # All possible winning combinations
-      @winner = true if o_positions.include?(0) && o_positions.include?(1) && o_positions.include?(2)
-      @winner = true if o_positions.include?(0) && o_positions.include?(3) && o_positions.include?(6)
-      @winner = true if o_positions.include?(0) && o_positions.include?(4) && o_positions.include?(8)
-      @winner = true if o_positions.include?(1) && o_positions.include?(4) && o_positions.include?(7)
-      @winner = true if o_positions.include?(2) && o_positions.include?(4) && o_positions.include?(6)
-      @winner = true if o_positions.include?(2) && o_positions.include?(5) && o_positions.include?(8)
-      @winner = true if o_positions.include?(3) && o_positions.include?(4) && o_positions.include?(5)
-      @winner = true if o_positions.include?(6) && o_positions.include?(7) && o_positions.include?(8)
-    else 
-      # Find all the 'X' mark indexes
-      x_positions = []
-      @board_arr.each_with_index do |value, index|
-        x_positions << index if value == "X"
-      end
-      
-      # All possible winning combinations
-      @winner = true if x_positions.include?(0) && x_positions.include?(1) && x_positions.include?(2)
-      @winner = true if x_positions.include?(0) && x_positions.include?(3) && x_positions.include?(6)
-      @winner = true if x_positions.include?(0) && x_positions.include?(4) && x_positions.include?(8)
-      @winner = true if x_positions.include?(1) && x_positions.include?(4) && x_positions.include?(7)
-      @winner = true if x_positions.include?(2) && x_positions.include?(4) && x_positions.include?(6)
-      @winner = true if x_positions.include?(2) && x_positions.include?(5) && x_positions.include?(8)
-      @winner = true if x_positions.include?(3) && x_positions.include?(4) && x_positions.include?(5)
-      @winner = true if x_positions.include?(6) && x_positions.include?(7) && x_positions.include?(8)
+    # Check to see whoever was last to go won
+    # All possible winning combinations
+    if [@board_arr[0], @board_arr[1], @board_arr[2]].all?(@last_turn) ||
+        [@board_arr[0], @board_arr[3], @board_arr[6]].all?(@last_turn) ||
+        [@board_arr[0], @board_arr[4], @board_arr[8]].all?(@last_turn) ||
+        [@board_arr[1], @board_arr[4], @board_arr[7]].all?(@last_turn) ||
+        [@board_arr[2], @board_arr[4], @board_arr[6]].all?(@last_turn) ||
+        [@board_arr[2], @board_arr[5], @board_arr[8]].all?(@last_turn) ||
+        [@board_arr[3], @board_arr[4], @board_arr[5]].all?(@last_turn) ||
+        [@board_arr[6], @board_arr[7], @board_arr[8]].all?(@last_turn)
+      @winner = true
+    else
+      # If there is no winner then check for a draw
+      check_for_draw()
     end
-    # If there is no winner then check for a draw
-    check_for_draw()
   end
 
   def check_for_draw
