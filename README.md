@@ -25,3 +25,7 @@ Intermediate Projects:
 - Tic Tac Toe
 
   - Classic 3x3 grid game. 2 players try to line up 3 of their marks in a row either horizontally, vertically, or diagonally.
+
+- Mastermind
+
+  - Color guessing game. Player tries to guess a randomized 4 color combination within 12 guesses. Player receives feedback on their guesses to help narrow down the answer.
