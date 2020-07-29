@@ -2,7 +2,7 @@
 
 All Ruby related projects that follow The Odin Project
 
-Basic Projects:
+# Basic Projects:
 
 - Caesar Cipher
 
@@ -20,7 +20,7 @@ Basic Projects:
 
   - Using an array of random numbers, sort them by using the sorting algorithm "Bubble sort".
 
-Intermediate Projects:
+# Intermediate Projects:
 
 - Tic Tac Toe
 
