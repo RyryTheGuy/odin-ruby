@@ -29,3 +29,7 @@ All Ruby related projects that follow The Odin Project
 - Mastermind
 
   - Color guessing game. Player tries to guess a randomized 4 color combination within 12 guesses. Player receives feedback on their guesses to help narrow down the answer.
+
+- Event Manager (uses Google Civic Info API)
+
+  - Email generator to "help in engaging future attendees" at an imaginary non-profit organization.
