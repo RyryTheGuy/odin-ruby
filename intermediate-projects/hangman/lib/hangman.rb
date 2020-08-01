@@ -30,6 +30,7 @@ class Hangman
   end
   
   def valid_input?(input)
+    # Make sure the user selects an option
     if input[0] == "1" || input[0] == "2"
       @option = input[0]
       return true
@@ -41,47 +42,57 @@ class Hangman
   end
 
   def get_word
+    # Grab a random word from the file
     File.open("5desk.txt", "r") do |file|
       @word_to_guess = file.readlines[rand(0..61405)].chomp
     end
+
+    # Save the word as underscores
     create_underscores(@word_to_guess)
   end
 
   def create_underscores(word)
-    @hidden_word = word.gsub(/\w/, "_ ").strip
+    # Convert the word to underscores
+    @hidden_word = word.gsub(/\w/, "_").strip
   end
 
   def play_game
+    # Create a new word or load a game
     @option == "1" ? get_word : load_game
+
+    # Play until player wins, loses, or saves the game
     until @winner || @strikes == 7 || @saved
       print_status
       guess_letter
     end
+
+    # Output winner/loser text or tell the user they saved
+    puts @winner ? "You win! The word was #{@word_to_guess}." : @strikes == 7 ? "You lose, the word was #{@word_to_guess}." : "Game Saved."
   end
 
   def load_game
-    # TODO: Show user all saves and when the file was saved/created, Load game from JSON file
+    # Read and parse the json file
+    file = File.read("hangman.json")
+    data_hash = JSON.parse(file)
 
+    # Save the data from the file to the instance variables
+    @word_to_guess = data_hash["word_to_guess"]
+    @hidden_word = data_hash["hidden_word"]
+    @incorrect_letters = data_hash["incorrect_letters"]
+    @strikes = data_hash["strikes"].to_i
   end
 
   def save_game
-    # ID the saves
-    id = 1
-    id += 1 until !File.exists?("saves/hangman_#{id}.json")
-
-    # Assign a file name if the game is new (loaded games have a file)
-    @file_name == "saves/hangman_#{id}.json" if @file_name == ""
-    
+    # Save the instance variables to a hash
     save_data = {
-      :file_name => @file_name
       :word_to_guess => @word_to_guess,
       :hidden_word => @hidden_word,
       :incorrect_letters => @incorrect_letters,
-      :strikes => @strikes, 
-      :winner => @winner
+      :strikes => @strikes
     }
 
-    File.open(@file_name, "w") { |file| file << JSON.pretty_generate(save_data) }
+    # JSON the data and save the file
+    File.open("hangman.json", "w") { |file| file << JSON.pretty_generate(save_data) }
   end 
 
   # Print out how many strikes the user has gotten, what incorrect letters were guessed and the hidden word
@@ -89,14 +100,25 @@ class Hangman
     puts 
     puts "Total Strikes: #{@strikes} / 7"
     puts "Incorrect Letters: #{@incorrect_letters.join(', ')}"
-    puts "Word: #{@hidden_word}"
+    puts "Word: #{@hidden_word.split("").join(" ")}"
     puts "Guess a letter or enter 1 to save and exit the game:"
   end
 
   def guess_letter()
+    letter = ""
     loop do
-      break if validate_letter?(gets.chomp)
-    end    
+      letter = gets.chomp.downcase
+      break if validate_letter?(letter)
+    end
+    
+    # Reveal all the letters that occur in the word, otherwise add a strike and add the guessed letter to the incorrect letters
+    if @word_to_guess.include?(letter[0]) && !@saved
+      reveal_letter(letter[0])
+      @winner = true unless @hidden_word.include?("_")
+    else
+      @strikes += 1
+      @incorrect_letters << letter[0]
+    end
   end
   
   def validate_letter?(letter)
@@ -113,7 +135,19 @@ class Hangman
       puts "Please input a letter"
       return false
     end
+    
+    # Any letter that was already guessed
+    if @incorrect_letters.include?(letter[0]) || @hidden_word.include?(letter[0])
+      puts "You already guessed that letter!"
+      return false
+    end
     true
+  end
+
+  def reveal_letter(letter)
+    @word_to_guess.split("").each_with_index do |char, index| 
+      @hidden_word[index] = char if char == letter
+    end
   end
 end
 
