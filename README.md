@@ -33,3 +33,7 @@ All Ruby related projects that follow The Odin Project
 - Event Manager (uses Google Civic Info API)
 
   - Email generator to "help in engaging future attendees" at an imaginary non-profit organization.
+
+- Hangman (save and load functionality)
+
+  - Guessing word game. Try to guess a randomly selected word by guessing letters. Uncover all the letters to win the game.
