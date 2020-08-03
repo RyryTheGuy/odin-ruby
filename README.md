@@ -37,3 +37,13 @@ All Ruby related projects that follow The Odin Project
 - Hangman (save and load functionality)
 
   - Guessing word game. Try to guess a randomly selected word by guessing letters. Uncover all the letters to win the game.
+
+# Recursion
+
+- Fibonacci
+
+  - Print out a certain amount of numbers using Fibonacci Sequence. Fibonacci Sequence is a list of numbers where each number is the sum of the previous 2
+
+- Merge Sort
+
+  - An efficient sorting algorithm. Read More about [Merge Sort](https://en.wikipedia.org/wiki/Merge_sort).
