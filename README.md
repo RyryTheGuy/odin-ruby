@@ -38,7 +38,7 @@ All Ruby related projects that follow The Odin Project
 
   - Guessing word game. Try to guess a randomly selected word by guessing letters. Uncover all the letters to win the game.
 
-# Recursion
+# Computer Science
 
 - Fibonacci
 
