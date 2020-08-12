@@ -117,6 +117,20 @@ class Tree
     return arr
   end
 
+  def inorder(root = @root)
+    # Base Case
+    return if root.nil?
+
+    arr = []
+
+    arr << inorder(root.left_node)
+    arr << root.value
+    arr << inorder(root.right_node)
+
+    # Returns the array of numbers without the extra arrays and nil values
+    return arr.flatten.compact
+  end
+
   def pretty_print(node = @root, prefix="", is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? "│ " : " "}", false) if node.right_node
     puts "#{prefix}#{is_left ? "└── " : "┌── "}#{node.value.to_s}"
@@ -159,7 +173,6 @@ tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 tree.build_tree
 tree.insert(6)
 # tree.pretty_print
-tree.delete(8)
 tree.pretty_print
 # p tree.find(1)
-p tree.level_order
+p tree.inorder
