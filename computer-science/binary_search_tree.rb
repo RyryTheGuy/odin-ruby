@@ -93,6 +93,30 @@ class Tree
     end
   end
 
+  def level_order(root = @root)
+    # Base case
+    return if root.nil?
+
+    queue = []
+    arr = []
+    queue.unshift(root)
+
+    # Loop until the queue is empty
+    until queue.size == 0
+      # Grab the first node in the queue
+      current = queue[-1] 
+
+      # Remove the first node in the queue
+      arr << queue.pop.value
+
+      # Add the current node's left and right child to the queue 
+      queue.unshift(current.left_node) unless current.left_node.nil?
+      queue.unshift(current.right_node) unless current.right_node.nil?
+    end
+
+    return arr
+  end
+
   def pretty_print(node = @root, prefix="", is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? "│ " : " "}", false) if node.right_node
     puts "#{prefix}#{is_left ? "└── " : "┌── "}#{node.value.to_s}"
@@ -136,5 +160,6 @@ tree.build_tree
 tree.insert(6)
 # tree.pretty_print
 tree.delete(8)
-# tree.pretty_print
-p tree.find(1)
+tree.pretty_print
+# p tree.find(1)
+p tree.level_order
