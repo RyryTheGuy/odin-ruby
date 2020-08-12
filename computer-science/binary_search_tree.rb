@@ -117,11 +117,9 @@ class Tree
     return arr
   end
 
-  def inorder(root = @root)
+  def inorder(root = @root, arr = [])
     # Base Case
     return if root.nil?
-
-    arr = []
 
     arr << inorder(root.left_node)
     arr << root.value
@@ -130,7 +128,32 @@ class Tree
     # Returns the array of numbers without the extra arrays and nil values
     return arr.flatten.compact
   end
+  
+  def preorder(root = @root, arr = [])
+    # Base Case
+    return if root.nil?
+  
+    arr << root.value
+    arr << preorder(root.left_node)
+    arr << preorder(root.right_node)
+  
+    # Returns the array of numbers without the extra arrays and nil values
+    return arr.flatten.compact
 
+  end
+  
+  def postorder(root = @root, arr = [])
+    # Base Case
+    return if root.nil?
+  
+    arr << postorder(root.left_node)
+    arr << postorder(root.right_node)
+    arr << root.value
+  
+    # Returns the array of numbers without the extra arrays and nil values
+    return arr.flatten.compact
+
+  end
   def pretty_print(node = @root, prefix="", is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? "│ " : " "}", false) if node.right_node
     puts "#{prefix}#{is_left ? "└── " : "┌── "}#{node.value.to_s}"
@@ -176,3 +199,5 @@ tree.insert(6)
 tree.pretty_print
 # p tree.find(1)
 p tree.inorder
+p tree.preorder
+p tree.postorder
