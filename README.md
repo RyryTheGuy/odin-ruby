@@ -47,3 +47,7 @@ All Ruby related projects that follow The Odin Project
 - Merge Sort
 
   - An efficient sorting algorithm. Read More about [Merge Sort](https://en.wikipedia.org/wiki/Merge_sort).
+
+- Binary Search Tree
+
+  - In computer science, a binary search tree, also called an ordered or sorted binary tree, is a rooted binary tree whose internal nodes each store a key greater than all the keys in the node's left subtree and less than those in its right subtree.
