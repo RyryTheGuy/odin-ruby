@@ -50,4 +50,4 @@ All Ruby related projects that follow The Odin Project
 
 - Binary Search Tree
 
-  - In computer science, a binary search tree, also called an ordered or sorted binary tree, is a rooted binary tree whose internal nodes each store a key greater than all the keys in the node's left subtree and less than those in its right subtree.
+  - Create a BST with the following methods: build_tree, insert, delete, find, level_order, inorder, preorder, postorder, height, depth, balanced?, rebalance
