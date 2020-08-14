@@ -154,6 +154,16 @@ class Tree
     return arr.flatten.compact
 
   end
+
+  def height(root = @root)
+    return -1 if root.nil?
+
+    height_left = height(root.left_node)
+    height_right = height(root.right_node)
+      
+    return  height_left > height_right ? height_left + 1 : height_right + 1
+  end
+
   def pretty_print(node = @root, prefix="", is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? "│ " : " "}", false) if node.right_node
     puts "#{prefix}#{is_left ? "└── " : "┌── "}#{node.value.to_s}"
@@ -198,6 +208,7 @@ tree.insert(6)
 # tree.pretty_print
 tree.pretty_print
 # p tree.find(1)
-p tree.inorder
-p tree.preorder
-p tree.postorder
+# p tree.inorder
+# p tree.preorder
+# p tree.postorder
+p tree.height
