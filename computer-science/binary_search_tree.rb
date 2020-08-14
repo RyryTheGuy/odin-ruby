@@ -17,13 +17,12 @@ class Tree
   attr_accessor :root
 
   def initialize(arr)
-    @arr = arr
-    @root = nil
+    build_tree(arr)
   end
 
-  def build_tree
+  def build_tree(arr)
     # Sort and remove duplicates
-    arr = @arr.sort.uniq
+    arr = arr.sort.uniq
 
     # Make the BST
     @root = Node.new(arr[arr.size/2])
@@ -172,6 +171,21 @@ class Tree
 
     return  depth_left > depth_right ? depth_left + 1 : depth_right + 1
   end
+  
+  def balanced?
+    height_left = height(@root.left_node)
+    height_right = height(@root.right_node)
+
+    return true if height_left + 1 == height_right || height_right + 1 == height_left || height_left == height_right
+    false
+  end
+
+  def rebalance
+    # Only rebalance the tree if the tree is unbalanced
+    unless balanced?
+      build_tree(level_order)
+    end
+  end
 
   def pretty_print(node = @root, prefix="", is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? "│ " : " "}", false) if node.right_node
@@ -204,21 +218,29 @@ class Tree
 
     return current
   end
-
 end
 
-# node1 = Node.new(100)
-# node2 = Node.new(10)
-# p node1 > node2
-
-tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-tree.build_tree
-tree.insert(6)
-# tree.pretty_print
-tree.pretty_print
-# p tree.find(1)
-# p tree.inorder
-# p tree.preorder
-# p tree.postorder
-p tree.height
-p tree.depth
+bst = Tree.new(Array.new(15) { rand(1..100) })
+bst.pretty_print
+p "Balanced: #{bst.balanced?}"
+p "Level Order: #{bst.level_order}"
+p "Preorder: #{bst.preorder}"
+p "Postorder: #{bst.postorder}"
+p "Inorder: #{bst.inorder}"
+p "Inserting 6 Random elements..."
+bst.insert(rand(100..1000))
+bst.insert(rand(100..1000))
+bst.insert(rand(100..1000))
+bst.insert(rand(100..1000))
+bst.insert(rand(100..1000))
+bst.insert(rand(100..1000))
+bst.pretty_print
+p "Balanced: #{bst.balanced?}"
+p "Rebalancing the Tree..."
+bst.rebalance
+bst.pretty_print
+p "Balanced: #{bst.balanced?}"
+p "Level Order: #{bst.level_order}"
+p "Preorder: #{bst.preorder}"
+p "Postorder: #{bst.postorder}"
+p "Inorder: #{bst.inorder}"
