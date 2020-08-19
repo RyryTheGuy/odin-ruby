@@ -100,7 +100,7 @@ class Mastermind
         @correct_feedback[:correct_color] -= 1
       end
     end
-    # Show the user their guess and what they got right
+    # Show the user their guess and what they got right 
     print_feedback
   end
 
