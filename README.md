@@ -51,3 +51,7 @@ All Ruby related projects that follow The Odin Project
 - Binary Search Tree
 
   - Create a BST with the following methods: build_tree, insert, delete, find, level_order, inorder, preorder, postorder, height, depth, balanced?, rebalance
+
+- Knight Travails
+
+  - Create a function that shows the simplest possible way a Knight on a chessboard gets from one square to another. Outputs all the squares the Knight touches. Required a BST-like data structure.
