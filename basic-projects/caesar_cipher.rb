@@ -31,6 +31,3 @@ def wrap_char_code(code, shift)
     return (code + shift) % 122 < 96 ? 96 + ((code + shift) % 122) : code + shift
   end
 end
-
-
-p caesar_cipher("Hello, World!", 75)
